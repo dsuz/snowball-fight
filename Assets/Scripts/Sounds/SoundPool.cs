@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Sounds
 {
+    /// <summary>
+    /// SoundPoolの管理を行う
+    /// </summary>
     public class SoundPool
     {
         Transform _parent = null;
@@ -24,21 +27,22 @@ namespace Sounds
             }
         }
 
-        public SoundEffect Use(Transform target)
+        public SoundEffect Use(Vector3 position)
         {
             foreach (SoundEffect s in _soundsPool)
             {
                 if (!s.gameObject.activeSelf)
                 {
                     s.gameObject.SetActive(true);
-                    if (target != null) s.transform.SetParent(target);
+                    s.transform.parent = null;
+                    s.transform.position = position;
                     s.SetUp(Delete);
                     return s;
                 }
             }
 
             Create(10);
-            return Use(target);
+            return Use(position);
         }
 
         void Delete(SoundEffect set)
