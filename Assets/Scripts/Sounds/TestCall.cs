@@ -6,6 +6,6 @@ public class TestCall : MonoBehaviour
 {
     public void Call()
     {
-        SoundManager.UseRequest(0);
+        SoundManager.UseRequest(0, true);
     }
 }

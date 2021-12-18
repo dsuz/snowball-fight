@@ -14,7 +14,6 @@ public class SoundEffect : MonoBehaviour
 
         if (!_source.isPlaying)
         {
-            return;
             _isPlaying = false;
             _callBack.Invoke(this);
         }

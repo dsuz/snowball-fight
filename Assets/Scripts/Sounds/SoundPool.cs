@@ -1,45 +1,50 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundPool
+namespace Sounds
 {
-    GameObject _parent = null;
-    List<SoundEffect> _soundsPool = new List<SoundEffect>();
-    int _count = 1;
-
-    public void Create(int count)
+    public class SoundPool
     {
-        if (_parent == null) _parent = new GameObject("SoundsPool");
+        Transform _parent = null;
+        List<SoundEffect> _soundsPool = new List<SoundEffect>();
+        int _count = 1;
 
-        for (int i = 0; i < count; i++)
+        public void Create(int count)
         {
-            GameObject obj = new GameObject($"SE.No:{_count}");
-            obj.transform.SetParent(_parent.transform);
-            _soundsPool.Add(obj.AddComponent<SoundEffect>());
-            obj.SetActive(false);
+            if (_parent == null) _parent = new GameObject("SoundsPool").transform;
 
-            _count++;
-        }
-    }
-
-    public SoundEffect Use()
-    {
-        foreach (SoundEffect s in _soundsPool)
-        {
-            if (!s.gameObject.activeSelf)
+            for (int i = 0; i < count; i++)
             {
-                s.gameObject.SetActive(true);
-                s.SetUp(Delete);
-                return s;
+                GameObject obj = new GameObject($"SE.No:{_count}");
+                obj.transform.SetParent(_parent);
+                _soundsPool.Add(obj.AddComponent<SoundEffect>());
+                obj.SetActive(false);
+
+                _count++;
             }
         }
 
-        Create(10);
-        return Use();
-    }
+        public SoundEffect Use(Transform target)
+        {
+            foreach (SoundEffect s in _soundsPool)
+            {
+                if (!s.gameObject.activeSelf)
+                {
+                    s.gameObject.SetActive(true);
+                    if (target != null) s.transform.SetParent(target);
+                    s.SetUp(Delete);
+                    return s;
+                }
+            }
 
-    void Delete(SoundEffect set)
-    {
-        set.gameObject.SetActive(false);
+            Create(10);
+            return Use(target);
+        }
+
+        void Delete(SoundEffect set)
+        {
+            set.transform.SetParent(_parent);
+            set.gameObject.SetActive(false);
+        }
     }
 }
