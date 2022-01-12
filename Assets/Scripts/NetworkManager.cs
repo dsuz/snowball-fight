@@ -11,6 +11,8 @@ using UnityEngine.Events;
 /// </summary>
 public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime 用のクラスを継承する
 {
+    /// <summary>ゲーム開始ボタン</summary>
+    [SerializeField] GameObject _startButton;
     /// <summary>最大プレイ可能人数</summary>
     [SerializeField] int _maxPlayerCount = 2;
     /// <summary>ゲーム開始時に実行される処理</summary>
@@ -89,10 +91,33 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime 用�
     }
 
     /// <summary>
+    /// buttonに設定
+    /// </summary>
+    public void GameStart()
+    {
+        _startButton.SetActive(false);
+
+        // 対戦中に他が入れないようにする
+        Debug.Log("Closing Room");
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+
+        RaiseEventOptions raiseEventoptions = new RaiseEventOptions();
+        raiseEventoptions.Receivers = ReceiverGroup.All;
+        SendOptions sendOptions = new SendOptions();
+        PhotonNetwork.RaiseEvent((byte)NetworkEvents.GameStart, null, raiseEventoptions, sendOptions);
+    }
+
+    /// <summary>
     /// ゲームを開始する
     /// </summary>
     void StartGame()
     {
+        // マスターだけにボタンを表示
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+        {
+            _startButton.SetActive(true);
+        }
+
         Debug.Log("Start Game");
         _onGameStart.Invoke();
     }
