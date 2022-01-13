@@ -89,8 +89,8 @@ public class PlayerController : MonoBehaviour
         });
     }
 
-    /// <summary>dddddddddd
-    /// 入力を制御するd
+    /// <summary>
+    /// 入力を制御する
     /// </summary>
     void Update()
     {
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         _dir = Vector3.right * h;
         // カメラのローカル座標系を基準に dir を変換する
         _dir = Camera.main.transform.TransformDirection(_dir);
-        // カdメラは斜め下に向いているので、Y 軸の値を 0 にして「XZ 平面上のベクトル」にする
+        // カメラは斜め下に向いているので、Y 軸の値を 0 にして「XZ 平面上のベクトル」にする
         _dir.y = 0;
 
         if (_hasSnowball && Input.GetButtonDown("Fire1"))
