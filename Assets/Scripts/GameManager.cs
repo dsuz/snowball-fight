@@ -52,8 +52,11 @@ public class GameManager : MonoBehaviour, IOnEventCallback
         if (!_view.IsMine)
             return;
 
-        object[] scores = new object[] { _scoreA, _scoreB, _gameTimer };
-        _view.RPC("SyncScore", RpcTarget.Others, scores);
+        if (PhotonNetwork.InRoom)
+        {
+            object[] scores = new object[] { _scoreA, _scoreB, _gameTimer };
+            _view.RPC("SyncScore", RpcTarget.Others, scores);
+        }
 
         if (_inGame)
         {
