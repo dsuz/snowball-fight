@@ -106,28 +106,17 @@ public class PlayerController : MonoBehaviour
 
         if (_hasSnowball && Input.GetButtonDown("Fire1"))
         {
-            _handIK.enabled = false;
             _anim?.SetBool("Throw", true);
-            _status = PlayerStatus.Throwing;
-            _hasSnowball = false;
-            _snowball.SetActive(false);
-            PhotonNetwork.Instantiate(_snowballPrefabName, this._snowballMuzzle.position, this._snowballMuzzle.rotation);
-        }
-        else if (Input.GetButtonUp("Fire1"))
-        {
-            _anim?.SetBool("Throw", false);
         }
 
         if (Input.GetButtonDown("Fire2"))
         {
-            _handIK.enabled = false;
             _anim?.SetBool("Crouch", true);
-            _status = PlayerStatus.Crouch;
         }
         else if (Input.GetButtonUp("Fire2"))
         {
-            _anim?.SetBool("Crouch", false);
             _status = PlayerStatus.None;
+            _anim?.SetBool("Crouch", false);
 
             if (_snowballMeter > 0.99f)
             {
@@ -147,6 +136,27 @@ public class PlayerController : MonoBehaviour
         {
             _snowballMeter += Time.deltaTime * _createSnowballSpeed;
         }
+    }
+
+    /// <summary>
+    /// しゃがむ。Animation Event から実行されることを想定している。
+    /// </summary>
+    void Crouch()
+    {
+        _handIK.enabled = false;
+        _status = PlayerStatus.Crouch;
+    }
+
+    /// <summary>
+    /// ボールを投げる。Animation Event から実行されることを想定している。
+    /// </summary>
+    void PitchSnowBall()
+    {
+        _handIK.enabled = false;
+        _status = PlayerStatus.Throwing;
+        _hasSnowball = false;
+        _snowball.SetActive(false);
+        PhotonNetwork.Instantiate(_snowballPrefabName, this._snowballMuzzle.position, this._snowballMuzzle.rotation);
     }
 
     /// <summary>
