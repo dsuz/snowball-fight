@@ -82,7 +82,7 @@ PrefabInstance:
     - target: {fileID: 7882938156277779802, guid: 95b7c52c186728040abd0a4d7cf54071,
         type: 3}
       propertyPath: m_Name
-      value: PlayerPrefabA Variant
+      value: PlayerPrefabB
       objectReference: {fileID: 0}
     - target: {fileID: 7882938156277779802, guid: 95b7c52c186728040abd0a4d7cf54071,
         type: 3}
