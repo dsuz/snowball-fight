@@ -159,8 +159,12 @@ public class PlayerController : MonoBehaviour
         _status = PlayerStatus.Throwing;
         _hasSnowball = false;
         _snowball.SetActive(false);
-        GameObject g = PhotonNetwork.Instantiate(_snowballPrefabName, this._snowballMuzzle.position, this._snowballMuzzle.rotation);
-        g.GetComponent<SnowballController>().ScoreFix(weightf);
+
+        if (_view.IsMine)
+        {
+            GameObject g = PhotonNetwork.Instantiate(_snowballPrefabName, this._snowballMuzzle.position, this._snowballMuzzle.rotation);
+            g.GetComponent<SnowballController>().ScoreFix(weightf);
+        }
     }
 
     /// <summary>
