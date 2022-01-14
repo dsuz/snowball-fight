@@ -108,17 +108,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime 用�
     }
 
     /// <summary>
-    /// ゲームを開始する
+    /// 対戦を開始する
     /// </summary>
     void StartGame()
     {
         // マスターだけにボタンを表示
         if (PhotonNetwork.LocalPlayer.IsMasterClient)
-        {
             _startButton.SetActive(true);
-        }
 
-        Debug.Log("Start Game");
         _onGameStart.Invoke();
     }
 

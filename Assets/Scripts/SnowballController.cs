@@ -30,8 +30,25 @@ public class SnowballController : MonoBehaviour
     {
         if (_view.IsMine)
         {
+            if (collision.gameObject.CompareTag("TeamA"))
+            {
+                Hit(0, 1);
+            }
+            if (collision.gameObject.CompareTag("TeamB"))
+            {
+                Hit(1, 0);
+            }
             PhotonNetwork.Destroy(_view);
         }
+    }
+
+    /// <summary>
+    /// 雪玉が当たった
+    /// </summary>
+    void Hit(int scoreA, int scoreB)
+    {
+        GameManager gm = FindObjectOfType<GameManager>();
+        gm.AddScore(scoreA, scoreB);
     }
 
     void OnDestroy()
