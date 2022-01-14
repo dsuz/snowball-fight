@@ -32631,7 +32631,7 @@ MonoBehaviour:
   _playerPrefabNameA: PlayerPrefabA
   _playerPrefabNameB: PlayerPrefabB
   _inGame: 0
-  _gameTimer: 5
+  _gameTimer: 60
   _timerText: {fileID: 216858296}
   _scoreA: 0
   _scoreB: 0

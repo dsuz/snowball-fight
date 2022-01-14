@@ -524,7 +524,6 @@ GameObject:
   - component: {fileID: 1634837493}
   - component: {fileID: 1634837495}
   - component: {fileID: 1634837494}
-  - component: {fileID: 1634837496}
   m_Layer: 8
   m_Name: Crosshair
   m_TagString: Untagged
@@ -588,23 +587,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1634837496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1634837492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4732a615a18634f409e7c9ece8a1063e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sprite: {fileID: 1634837494}
-  _crosshair: {fileID: 1634837493}
-  _player: {fileID: 2180937846758577238}
-  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  _lockOnColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1961476595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,8 +2096,8 @@ GameObject:
   - component: {fileID: -9216041785326845766}
   - component: {fileID: 826986097}
   m_Layer: 8
-  m_Name: PlayerPrefab
-  m_TagString: Player
+  m_Name: PlayerPrefabB
+  m_TagString: TeamB
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2203,8 +2185,6 @@ MonoBehaviour:
   _cameraFollowTarget: {fileID: 717592172086110196}
   _cameraLookAtTarget: {fileID: 0}
   _movePower: 10
-  _lockOnDistance: 10
-  _dashPower: 40
   _handIK: {fileID: 826986097}
   _snowball: {fileID: 1961476595}
   _createSnowballSpeed: 1

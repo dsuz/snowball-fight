@@ -48,8 +48,9 @@ public class PlayerController : MonoBehaviour
 
     /// <summary>ロックオンしているターゲット</summary>
     Transform _lockedTarget = default;
-    /// <summary>ダッシュ・体当たりの対象となっているターゲット</summary>
-    Transform _dashTarget = default;
+
+    /// <summary>雪玉の重さ</summary>
+    float weightf = 0;
 
     /// <summary>
     /// ロックオンしているターゲット。何もロックオンしていない時は null
@@ -118,10 +119,12 @@ public class PlayerController : MonoBehaviour
             _status = PlayerStatus.None;
             _anim?.SetBool("Crouch", false);
 
-            if (_snowballMeter > 0.99f)
+            if (_snowballMeter > 0.01f)
             {
                 _hasSnowball = true;
                 _snowball.SetActive(true);
+
+                weightf = _snowballMeter * 100;
             }
 
             if (_hasSnowball)
@@ -156,7 +159,8 @@ public class PlayerController : MonoBehaviour
         _status = PlayerStatus.Throwing;
         _hasSnowball = false;
         _snowball.SetActive(false);
-        PhotonNetwork.Instantiate(_snowballPrefabName, this._snowballMuzzle.position, this._snowballMuzzle.rotation);
+        GameObject g = PhotonNetwork.Instantiate(_snowballPrefabName, this._snowballMuzzle.position, this._snowballMuzzle.rotation);
+        g.GetComponent<SnowballController>().ScoreFix(weightf);
     }
 
     /// <summary>

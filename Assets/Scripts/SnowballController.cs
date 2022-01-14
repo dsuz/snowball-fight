@@ -11,6 +11,8 @@ public class SnowballController : MonoBehaviour
     [SerializeField] GameObject _hitEffect = default;
     PhotonView _view = default;
 
+    int score;
+
     void Start()
     {
         _view = GetComponent<PhotonView>();
@@ -26,17 +28,23 @@ public class SnowballController : MonoBehaviour
         }
     }
 
+    public void ScoreFix(float f)
+    {
+        score += (int)f;
+        Debug.Log(score);
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (_view.IsMine)
         {
             if (collision.gameObject.CompareTag("TeamA"))
             {
-                Hit(0, 1);
+                Hit(0, score);
             }
             if (collision.gameObject.CompareTag("TeamB"))
             {
-                Hit(1, 0);
+                Hit(score, 0);
             }
             PhotonNetwork.Destroy(_view);
         }
