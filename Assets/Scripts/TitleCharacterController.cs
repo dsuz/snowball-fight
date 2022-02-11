@@ -13,7 +13,7 @@ public class TitleCharacterController : MonoBehaviour
     Quaternion m_defaultRotation;
     void Start()
     {
-        m_interval = Random.Range(1, 4);
+        m_interval = Random.Range(10, 41) / 10f;
         m_defaultRotation = this.transform.rotation;
         m_anim = GetComponent<Animator>();
     }
@@ -26,7 +26,7 @@ public class TitleCharacterController : MonoBehaviour
             {
                 m_anim.CrossFade("Crouch", 0.1f);
                 m_pattern++;
-                m_interval = Random.Range(1,6);
+                m_interval = Random.Range(10, 61) / 10f;
             }
             else if (m_pattern == 1)
             {
