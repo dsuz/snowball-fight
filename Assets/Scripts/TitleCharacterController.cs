@@ -38,7 +38,7 @@ public class TitleCharacterController : MonoBehaviour
             {
                 m_anim.CrossFade("Idle", 1);
                 m_pattern = 0;
-                m_interval = Random.Range(1, 4);
+                m_interval = Random.Range(10, 41) / 10f;
             }
             m_time = 0;
         }
